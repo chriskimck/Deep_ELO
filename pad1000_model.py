@@ -59,7 +59,7 @@ model.summary()
 
 # train
 model.compile(optimizer=tf.train.AdamOptimizer(), loss='mean_squared_error', metrics=['accuracy'])
-history = model.fit(x_train, y_train, epochs=10, batch_size=32, validation_data=(x_val, y_val), verbose=1)
+history = model.fit(x_train, y_train, epochs=50, batch_size=32, validation_data=(x_val, y_val), verbose=1)
 prediction = model.predict(x_test)
 
 error = np.mean((prediction-y_test)**2,axis=0) # mean squared error
