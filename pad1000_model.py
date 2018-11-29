@@ -54,7 +54,7 @@ x_train, x_val, y_train, y_val = train_test_split(x_train,y_train, test_size = 0
 model = Sequential()
 model.add(Dense(512, input_dim=PAD_LEN, activation='relu'))
 model.add(Dropout(.25))
-model.add(Dense(1024, activation='relu'))
+model.add(Dense(1024, activation='elu'))
 model.add(Dropout(.35))
 model.add(Dense(2, activation='relu'))
 model.summary()
