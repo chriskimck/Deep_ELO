@@ -8,6 +8,7 @@ from keras.layers import Embedding, Flatten, Dense, Dropout
 
 NUM_GAMES = 24978 # Events 625,1541,2962,3904,5415,6698,7386,8655 were taken out (empty games)
 PAD_LEN = 329
+PAD_SCORE = 850
 
 data = pd.read_csv("data.csv") # contains white/black elo and stockfish scores for each game
 move_scores_df = data["MoveScores"]
@@ -28,9 +29,9 @@ for line in move_scores_df:
 			temp.append(s)
 	
 	if int(temp[-1]) > 0:
-		temp += [1000]*(PAD_LEN-len(temp))
+		temp += [PAD_SCORE]*(PAD_LEN-len(temp))
 	elif int(temp[-1]) < 0:
-		temp += [-1000]*(PAD_LEN-len(temp))
+		temp += [-PAD_SCORE]*(PAD_LEN-len(temp))
 	else:
 		temp += [0]*(PAD_LEN-len(temp))
 	
@@ -64,7 +65,8 @@ model.compile(optimizer=tf.train.AdamOptimizer(), loss='mean_squared_error', met
 history = model.fit(x_train, y_train, epochs=50, batch_size=32, validation_data=(x_val, y_val), verbose=1)
 prediction = model.predict(x_test)
 
-error = np.mean((prediction-y_test)**2,axis=0) # mean squared error
-print(error)
+error = np.mean(np.abs(prediction-y_test),axis=0) # mean absolute error
+# top error on kaggle competition: 155.77762
+print("white:", error[0], ", black:", error[1])
 # print(prediction[0:10])
 # print(y_test[0:10])
