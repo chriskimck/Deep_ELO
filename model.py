@@ -67,6 +67,6 @@ prediction = model.predict(x_test)
 
 error = np.mean(np.abs(prediction-y_test),axis=0) # mean absolute error
 # top error on kaggle competition: 155.77762
-print("white:", error[0], ", black:", error[1])
+print("white:", error[0], ", black:", error[1], "\naverage:", np.mean(error))
 # print(prediction[0:10])
 # print(y_test[0:10])
