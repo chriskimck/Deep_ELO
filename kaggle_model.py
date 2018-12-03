@@ -18,6 +18,7 @@ dataurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/kaggleda
 data = pd.read_csv(dataurl) # contains white/black elo and stockfish scores for each game
 
 testurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/kaggletest.csv'
+#testurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/worlds_classical.csv'
 test = pd.read_csv(testurl) # contains white/black elo and stockfish scores for each game
 
 move_scores_df = data["MoveScores"]
@@ -101,7 +102,7 @@ model.compile(optimizer=optim, loss='mean_squared_error', metrics=['mae'])
 history = model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=(X_val, y_val), verbose=1)
 prediction = model.predict(X_test)
 
-print(prediction[0:10])
+print(prediction)
 
 submission = pd.DataFrame()
 
@@ -109,4 +110,3 @@ submission['Event'] = event_test_df
 submission['WhiteElo'] = prediction[:,0]
 submission['BlackElo'] = prediction[:,1]
 submission.to_csv('submission_1.csv',index=False)
-print("white:", error[0], ", black:", error[1], "\naverage:", np.mean(error))
