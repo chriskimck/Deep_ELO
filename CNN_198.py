@@ -45,10 +45,10 @@ for line in move_scores_df:
 	if temp == []:
 		temp += [PAD_SCORE]*(PAD_LEN-len(temp))
 	else:
-		if int(temp[-1]) > 0:
+		if int(temp[-1]) > 50:
 			temp += [PAD_SCORE]*(PAD_LEN-len(temp))
 		
-		elif int(temp[-1]) < 0:
+		elif int(temp[-1]) < -50:
 			temp += [-PAD_SCORE]*(PAD_LEN-len(temp))	
 		else:
 			temp += [0]*(PAD_LEN-len(temp))
