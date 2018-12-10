@@ -14,11 +14,12 @@ NUM_GAMES = 24978 # Events 625,1541,2962,3904,5415,6698,7386,8655 were taken out
 PAD_LEN = 330
 PAD_SCORE = 850
 
-dataurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/kaggledata.csv'
+dataurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/Datasets/kaggledata.csv'
 data = pd.read_csv(dataurl) # contains white/black elo and stockfish scores for each game
 
-testurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/kaggletest.csv'
-#testurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/worlds_classical.csv'
+#testurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/Datasets/kaggletest.csv'
+testurl = 'https://raw.githubusercontent.com/chriskimck/Deep_ELO/master/Datasets/worlds_dataset.csv'
+
 test = pd.read_csv(testurl) # contains white/black elo and stockfish scores for each game
 
 move_scores_df = data["MoveScores"]
